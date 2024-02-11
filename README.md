@@ -22,7 +22,3 @@ FRONTEND
     - apri un terminale e posizionati nella cartella fronted-app
     - installa tutte le dipendenze con il comando : npm install
     - avvia l'applicazione con il comando : ng serve -o
-
-    
-
-
