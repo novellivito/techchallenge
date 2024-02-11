@@ -43,19 +43,11 @@ class DataService():
             self.load_data()
         
         if self.product_day.size == 0:
-            self.product_day = self.df.groupby(['factory','area','product_code','year','month','day','date']).size().reset_index(name='count')
+            count = self.df.groupby(['factory','area','year','month','day','date','product_code']).size().reset_index(name='count')
+            self.product_day = count.groupby(['factory','area','year','month','day','date']).size().reset_index(name='products_day')
             print("function calc_products_day_count executed")
-        return self.product_day
 
-    def calc_products_std_day(self):
-        if self.file_loaded == False:
-            self.load_data()
-        product_day = self.calc_products_day_count()
-        if product_day.size > 0 :
-            if self.product_day_std.size == 0:
-                self.product_day_std = product_day.groupby(['factory','area','product_code'])['count'].std().reset_index(name='std')
-                print("function calc_products_std_day executed")
-            return self.product_day_std
+        return self.product_day
 
     def calc_products_month(self):
         
@@ -67,7 +59,7 @@ class DataService():
         product_day = self.calc_products_day_count() 
         if product_day.size > 0 :  
             if self.product_month.size == 0:
-                self.product_month = product_day.groupby(['factory','area','product_code','year','month' ]) ['count'].mean().reset_index(name='avg')
+                self.product_month = product_day.groupby(['factory','area','year','month' ]) ['products_day'].mean().reset_index(name='avg_month')
                 print("function calc_products_month executed")
             return self.product_month
 
@@ -81,6 +73,38 @@ class DataService():
         product_month = self.calc_products_month()
         if product_month.size > 0 : 
             if self.product_year.size == 0:
-                product_year = product_month.groupby(['factory','area','product_code', 'year' ]) ['avg'].mean().reset_index(name='avg')
+                product_year = product_month.groupby(['factory','area', 'year' ]) ['avg_month'].mean().reset_index(name='avg_year')
                 print("function calc_products_year executed")
             return product_year
+
+ 
+    class FilterBuilder():
+      
+
+        def __init__(self,factory : str ='', area : str = '', year : int = 0, month : int = 0, day : int = 0 ):
+            self.factory = factory
+            self.area = area
+            self.year = year
+            self.month = month
+            self.day = day
+
+        def build(self):
+            filter = []
+
+            if self.factory != "":
+                filter.append("factory == @factory") 
+            if self.area != "":
+                filter.append( "area == @area")
+            if self.year > 0 :
+                filter.append("year == @year")
+            if self.month > 0:
+                filter.append("month == @month")
+            if self.day > 0:
+                filter.append("day == @day")
+        
+
+            if filter.__len__() > 0:
+                filter_str = " and ".join(filter)    
+                return filter_str
+            return ''
+        

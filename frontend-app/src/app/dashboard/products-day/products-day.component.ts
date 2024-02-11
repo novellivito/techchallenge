@@ -12,9 +12,11 @@ export class ProductsDayComponent implements OnInit{
 
   data : DataStuct[] = [] ;
 
-  displayedColumns: string[] = ['factory', 'area', 'product_code', 'year','month','day','count'];
+  displayedColumns: string[] = ['factory', 'area', 'year','month','day','products_day'];
   dataSource! : MatTableDataSource<DataStuct> ;
   
+  filtersMsg : string = 'No filter applied'
+
   @ViewChild(MatPaginator) 
   paginator!: MatPaginator;
 
@@ -25,12 +27,7 @@ export class ProductsDayComponent implements OnInit{
   
   constructor(private dashboard_service: DashboardService) {}
 
-  ngOnInit(): void {
-
-  
-  
-  
-  }
+  ngOnInit(): void {}
  
 
   ngAfterViewInit() {
@@ -70,11 +67,10 @@ export class ProductsDayComponent implements OnInit{
 export interface DataStuct {
   factory: string;
   area: string;
-  product_code: number;
   year: number;
   month: number;
   day: number;
   date : Date;
-  count : number ;
+  products_day : number ;
 }
  

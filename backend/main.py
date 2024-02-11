@@ -27,84 +27,38 @@ service = DataService('data.csv')
 def read_root():
     return "root"
 
+
 @app.get("/products_day_count")
-def get_products_day_count(factory : str = "", area : str = "", product_code : int=0, 
+def get_products_day_count(factory : str = "", area : str = "",
                            year : int = 0, month : int = 0, day : int = 0,
                            skip: int = 0, limit: int = 10):
-    
-    filter = []
+     
 
-    if factory != "":
-        filter.append("factory == @factory") 
-    if area != "":
-        filter.append( "area == @area")
-    if product_code > 0 :
-       filter.append("product_code == @product_code")
-    if year > 0 :
-        filter.append("year == @year")
-    if month > 0:
-        filter.append("month == @month")
-    if day > 0:
-        filter.append("day == @day")
- 
+    filter = DataService.FilterBuilder(factory=factory,area=area,year=year,month=month,day=day).build()
 
-    if filter.__len__() > 0:
-        filter_str = " and ".join(filter)
-        result = service.calc_products_day_count().iloc[skip:(skip+limit)].query(filter_str).to_dict(orient='records')
+    result = []
+
+    if filter != '':
+        result = service.calc_products_day_count().query(filter).iloc[skip:(skip+limit)].to_dict(orient='records')
     else:
         result = service.calc_products_day_count().iloc[skip:(skip+limit)].to_dict(orient='records')
-    return result
-
-@app.get("/products_std_day")
-def get_products_std_day(factory : str = "", area : str = "", product_code : int =0, 
-                         year : int = 0, month : int = 0, day : int = 0,
-                         skip: int = 0, limit: int = 10):
     
-    filter = []
-
-    if factory != "":
-        filter.append("factory == @factory") 
-    if area != "":
-        filter.append( "area == @area")
-    if product_code > 0 :
-       filter.append("product_code == @product_code")
-    if year > 0 :
-        filter.append("year == @year")
-    if month > 0:
-        filter.append("month == @month")
-    if day > 0:
-        filter.append("day == @day")
-
-    if filter.__len__() > 0:
-        filter_str = " and ".join(filter)
-        result = service.calc_products_std_day().query(filter_str).iloc[skip:(skip+limit)].to_dict(orient='records')
-    else:
-        result = service.calc_products_std_day().iloc[skip:(skip+limit)].to_dict(orient='records')
     return result
+
+
 
 @app.get("/products_avg_month")
-def get_products_month(factory : str = "", area : str = "", product_code : int=0, 
+def get_products_month(factory : str = "", area : str = "",
                        year : int = 0, month : int = 0,
                        skip: int = 0, limit: int = 10):
     
 
-    filter = []
+    filter = DataService.FilterBuilder(factory=factory,area=area,year=year,month=month).build()
 
-    if factory != "":
-        filter.append("factory == @factory") 
-    if area != "":
-        filter.append( "area == @area")
-    if product_code > 0 :
-       filter.append("product_code == @product_code")
-    if year > 0 :
-        filter.append("year == @year")
-    if month > 0:
-        filter.append("month == @month")
-     
+    result =[] 
 
-    if filter.__len__() > 0:
-        filter_str = " and ".join(filter)
-        result = service.calc_products_month().query(filter_str).iloc[skip:(skip+limit)].to_dict(orient='records')
+    if filter != '':
+        result = service.calc_products_month().query(filter).iloc[skip:(skip+limit)].to_dict(orient='records')
     else:
         result = service.calc_products_month().iloc[skip:(skip+limit)].to_dict(orient='records')
     return result
@@ -114,21 +68,13 @@ def get_products_year(factory : str = "", area : str = "", product_code : int=0,
                       year : int = 0,
                       skip: int = 0, limit: int = 10):
     
-    filter = []
+    
+    filter = DataService.FilterBuilder(factory = factory, area=area, year=year).build()
 
-    if factory != "":
-        filter.append("factory == @factory") 
-    if area != "":
-        filter.append( "area == @area")
-    if product_code > 0 :
-       filter.append("product_code == @product_code")
-    if year > 0 :
-        filter.append("year == @year")
+    result = []
 
-
-    if filter.__len__() > 0 :
-        filter_str = " and ".join(filter)
-        result = service.calc_products_year().query(filter_str).iloc[skip:(skip+limit)].to_dict(orient='records')
+    if filter != '':
+        result = service.calc_products_year().query(filter).iloc[skip:(skip+limit)].to_dict(orient='records')
     else:
         result = service.calc_products_year().iloc[skip:(skip+limit)].to_dict(orient='records')
     return result
