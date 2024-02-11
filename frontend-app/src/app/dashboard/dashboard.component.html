@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon" >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Factory Data Managment</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button> -->
+    <mat-icon >
+      
+    </mat-icon>
+
+    <!-- <img src="../../assets/Logo_Pirelli.svg" height="40px">  -->
+    
+  </mat-toolbar>
+
+  <mat-drawer-container class="dashboard-container" autosize>
+ 
+    <mat-drawer #drawer class="dashboard-sidenav" mode="side">
+   
+      <mat-nav-list>
+          <a mat-list-item routerLink="products-day">Products by Day</a>       
+          <a mat-list-item routerLink="...">Products AVG Month</a>  
+          <a mat-list-item routerLink="...">Products AVG Year</a>  
+      </mat-nav-list>
+
+      
+    </mat-drawer>
+  
+    <div class="dashboard-sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+  
+  
+  </mat-drawer-container>
