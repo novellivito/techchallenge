@@ -14,6 +14,8 @@ import {ProductsDayComponent } from './products-day/products-day.component';
 import {HttpClientModule } from '@angular/common/http';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import {MatTableModule} from '@angular/material/table';
     MatListModule,
     HttpClientModule,
     MatTableModule, 
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatInputModule,
+    FormsModule
 
   ]
 })

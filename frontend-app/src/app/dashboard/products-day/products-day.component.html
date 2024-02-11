@@ -1,6 +1,27 @@
 <div class="filters">
-  <button mat-button color="primary">Filters</button>
-  {{filtersMsg}}
+
+  <mat-form-field >
+    <mat-label>Factory</mat-label>
+    <input matInput placeholder="" value="" id="factory" [(ngModel)]="factory">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Area</mat-label>
+    <input matInput placeholder="" value="" [(ngModel)]="area">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Year</mat-label>
+    <input matInput type="number" placeholder="" value="" [(ngModel)]="year">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Month</mat-label>
+    <input matInput type="number"placeholder="" value="" [(ngModel)]="month">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Day</mat-label>
+    <input matInput type="number" placeholder="" value="" [(ngModel)]="day">
+  </mat-form-field>
+  
+  <button mat-button color="primary" (click)="ApplyFilter()" >Apply filter</button>
 </div>
 <div class="mat-elevation-z8">
     <table  mat-table [dataSource]="dataSource">

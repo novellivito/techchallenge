@@ -11,9 +11,29 @@ export class DashboardService {
 
   constructor(private http: HttpClient) {}
 
-  getProductsDay(skip: number = 0, limit: number = 50): Observable<any> {
+  getProductsDay(skip: number = 0, limit: number = 50, factory?:string,area?:string,year?:number,month?:number,day?:number ): Observable<any> {
 
-    return this.http.get<any>(this.apiUrl+'/products_day_count?skip='+ skip +'&limit=' + limit )
+    let params = '';
+
+    if (factory!=undefined) {
+      params+='&factory='+factory
+    }
+    if (area!=undefined) {
+      params+='&area='+area
+    }
+    if (year != undefined) {
+      params+='&year='+year
+    }
+    if (month != undefined) {
+      params+='&month='+month
+    }
+    if (day != undefined) {
+      params+='&day='+day
+    }
+
+  
+
+    return this.http.get<any>(this.apiUrl+'/products_day_count?skip='+ skip +'&limit=' + limit +params )
   }
 
 }

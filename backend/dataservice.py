@@ -77,7 +77,6 @@ class DataService():
                 print("function calc_products_year executed")
             return product_year
 
- 
     class FilterBuilder():
       
 

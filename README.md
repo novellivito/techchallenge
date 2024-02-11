@@ -8,7 +8,7 @@ BACKEND
     - assicurati di aver installato sul tuo pc python 3.12
     - apri un terminale e posizionati nella cartella backend
     - crea un venv con il comando : python -m venv techchallenge-venv
-    - attiva il venv con il comando : techchallenge-venv\Scripts\activate
+    - attiva il venv con il comando : techchallenge-venv\Scripts\activate per windows , techchallenge-venv\bin\activate per macos
     - installa tutte le dipendenze con questo comando : pip install -r requirements.txt
     - avvia l'esecuzione del file con il comando : python main.py 
     - il backend risponderà sulla porta 8000 (es. http://127.0.0.1:8000); endpoint disponibili :
