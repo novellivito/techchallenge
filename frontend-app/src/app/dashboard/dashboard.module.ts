@@ -16,12 +16,16 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ProductsAvgMonthComponent } from './products-avg-month/products-avg-month.component';
+import { ProductsAvgYearComponent } from './products-avg-year/products-avg-year.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    ProductsDayComponent
+    ProductsDayComponent,
+    ProductsAvgMonthComponent,
+    ProductsAvgYearComponent
   ],
   imports: [
     CommonModule,

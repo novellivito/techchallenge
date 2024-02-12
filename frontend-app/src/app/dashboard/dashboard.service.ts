@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DashboardService {
 
-  private apiUrl = 'http://127.0.0.1:8000'
+  private apiUrl = 'http://127.0.0.1:8000/api/v1'
 
   constructor(private http: HttpClient) {}
 
@@ -33,7 +33,52 @@ export class DashboardService {
 
   
 
-    return this.http.get<any>(this.apiUrl+'/products_day_count?skip='+ skip +'&limit=' + limit +params )
+    return this.http.get<any>(this.apiUrl+'/products_day?skip='+ skip +'&limit=' + limit + params )
   }
+
+  getProductsAvgMonth(skip: number = 0, limit: number = 50, factory?:string,area?:string,year?:number,month?:number): Observable<any> {
+
+    let params = '';
+
+    if (factory!=undefined) {
+      params+='&factory='+factory
+    }
+    if (area!=undefined) {
+      params+='&area='+area
+    }
+    if (year != undefined) {
+      params+='&year='+year
+    }
+    if (month != undefined) {
+      params+='&month='+month
+    }
+
+
+  
+
+    return this.http.get<any>(this.apiUrl+'/products_avg_month?skip='+ skip +'&limit=' + limit + params )
+  }
+
+  getProductsAvgYear(skip: number = 0, limit: number = 50, factory?:string,area?:string,year?:number): Observable<any> {
+
+    let params = '';
+
+    if (factory!=undefined) {
+      params+='&factory='+factory
+    }
+    if (area!=undefined) {
+      params+='&area='+area
+    }
+    if (year != undefined) {
+      params+='&year='+year
+    }
+    
+
+
+  
+
+    return this.http.get<any>(this.apiUrl+'/products_avg_year?skip='+ skip +'&limit=' + limit + params )
+  }
+
 
 }
