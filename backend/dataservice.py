@@ -2,11 +2,30 @@ import pandas as pd
 
 
 class DataService():
+    """
+    DataService: Class for managing and analyzing data from a CSV file using pandas.
+
+    Attributes:
+    - file_csv (str): Path to the CSV file.
+    - df (pd.DataFrame): DataFrame for storing loaded data.
+    - product_day (pd.DataFrame): DataFrame for daily product counts.
+    - product_month (pd.DataFrame): DataFrame for monthly average product counts.
+    - product_year (pd.DataFrame): DataFrame for yearly average product counts.
+    - file_loaded (bool): Flag indicating whether the data has been loaded.
+
+    Methods:
+    - __init__(self, path_file_csv): Constructor method to initialize the DataService object with the CSV file path.
+    - load_data(self, force_load=False): Method to load data from the CSV file into the DataFrame.
+    - calc_products_day_count(self): Method to calculate daily product counts.
+    - calc_products_month(self): Method to calculate monthly average product counts.
+    - calc_products_year(self): Method to calculate yearly average product counts.
+
+    """
+
     file_csv = '' 
     #cache objects
     df = pd.DataFrame()
     product_day = pd.DataFrame()
-    product_day_std = pd.DataFrame()
     product_month = pd.DataFrame()
     product_year = pd.DataFrame()
     file_loaded = False
@@ -15,6 +34,14 @@ class DataService():
         self.file_csv = path_file_csv
 
     def load_data(self, force_load = False):
+        """
+        Method to load data from the CSV file into the DataFrame.
+
+        Parameters:
+        - force_load (bool): If True, forces reloading the data even if it has been loaded before.
+
+        """
+
         print(f'File data : {self.file_csv}')
  
         if force_load == True :
@@ -38,6 +65,13 @@ class DataService():
                 self.file_loaded = False
             
     def calc_products_day_count(self):
+        """
+        Method to calculate daily product counts.
+
+        Returns:
+        - pd.DataFrame: DataFrame with daily product counts.
+
+        """
 
         if self.file_loaded == False :  
             self.load_data()
@@ -50,7 +84,13 @@ class DataService():
         return self.product_day
 
     def calc_products_month(self):
-        
+        """
+        Method to calculate monthly average product counts.
+
+        Returns:
+        - pd.DataFrame: DataFrame with monthly average product counts.
+
+        """
         #option using to_period
         #product_month = product_day.groupby(['area','product_code', pd.to_datetime(product_day['date']).dt.to_period('M') ]) ['count'].mean().reset_index(name='avg')
         if self.file_loaded == False:
@@ -64,7 +104,14 @@ class DataService():
             return self.product_month
 
     def calc_products_year(self):
-        
+        """
+        Method to calculate yearly average product counts.
+
+        Returns:
+        - pd.DataFrame: DataFrame with yearly average product counts.
+
+        """
+
         #option using to_period
         #product_year = product_month.groupby(['area','product_code', product_month['date'].dt.year ]) ['avg'].mean().reset_index(name='avg')
         if self.file_loaded == False:
@@ -78,7 +125,21 @@ class DataService():
             return product_year
 
     class FilterBuilder():
-      
+        """
+        A sub class for building filter conditions based on specified parameters.
+
+        Attributes:
+        - factory (str): Filter condition for the factory.
+        - area (str): Filter condition for the area.
+        - year (int): Filter condition for the year.
+        - month (int): Filter condition for the month.
+        - day (int): Filter condition for the day.
+
+        Methods:
+        - __init__(self, factory='', area='', year=0, month=0, day=0): Constructor to initialize the FilterBuilder.
+        - build(self): Builds the filter string based on specified parameters.
+
+        """
 
         def __init__(self,factory : str ='', area : str = '', year : int = 0, month : int = 0, day : int = 0 ):
             self.factory = factory
@@ -88,6 +149,13 @@ class DataService():
             self.day = day
 
         def build(self):
+            """
+            Builds the filter string based on specified parameters.
+
+            Returns:
+            - str: The constructed filter string.
+
+            """
             filter = []
 
             if self.factory != "":

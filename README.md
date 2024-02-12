@@ -13,10 +13,9 @@ BACKEND
 - Start the execution of the file with the command: `python main.py`
 - The backend will respond on port 8000 (e.g., http://127.0.0.1:8000); available endpoints:
 
-  - http://127.0.0.1:8000/products_day_count
-  - http://127.0.0.1:8000/products_std_day
-  - http://127.0.0.1:8000/products_avg_month
-  - http://127.0.0.1:8000/products_avg_year
+  - http://127.0.0.1:8000/api/v1/products_day
+  - http://127.0.0.1:8000/api/v1/products_avg_month
+  - http://127.0.0.1:8000/api/v1/products_avg_year
 
 FRONTEND
 
@@ -40,10 +39,9 @@ BACKEND
 - Avvia l'esecuzione del file con il comando: `python main.py`
 - Il backend risponderà sulla porta 8000 (es. http://127.0.0.1:8000); endpoint disponibili:
 
-  - http://127.0.0.1:8000/products_day_count
-  - http://127.0.0.1:8000/products_std_day
-  - http://127.0.0.1:8000/products_avg_month
-  - http://127.0.0.1:8000/products_avg_year
+  - http://127.0.0.1:8000/api/v1/products_day
+  - http://127.0.0.1:8000/api/v1/products_avg_month
+  - http://127.0.0.1:8000/api/v1/products_avg_year
 
 FRONTEND
 

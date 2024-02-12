@@ -21,8 +21,7 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-
-
+# Initialize DataService with the CSV file path
 service = DataService('data.csv')
 
 @app.get(f'{BASE_URL}/')
@@ -34,7 +33,21 @@ def read_root():
 def get_products_day(factory : str = '', area : str = '',
                            year : int = 0, month : int = 0, day : int = 0,
                            skip: int = 0, limit: int = 10):
-     
+    """
+    Endpoint to get daily product counts with filtering, pagination, and limits.
+
+    Parameters:
+    - factory (str): Filter for the factory.
+    - area (str): Filter for the area.
+    - year (int): Filter for the year.
+    - month (int): Filter for the month.
+    - day (int): Filter for the day.
+    - skip (int): Number of items to skip for pagination.
+    - limit (int): Maximum number of items to return.
+
+    Returns:
+    - List of dictionaries representing the obtained results.
+    """
 
     filter = DataService.FilterBuilder(factory=factory,area=area,year=year,month=month,day=day).build()
 
@@ -54,6 +67,20 @@ def get_products_month(factory : str = '', area : str = '',
                        year : int = 0, month : int = 0,
                        skip: int = 0, limit: int = 10):
     
+    """
+    Endpoint to get monthly average product counts with filtering, pagination, and limits.
+
+    Parameters:
+    - factory (str): Filter for the factory.
+    - area (str): Filter for the area.
+    - year (int): Filter for the year.
+    - month (int): Filter for the month.
+    - skip (int): Number of items to skip for pagination.
+    - limit (int): Maximum number of items to return.
+
+    Returns:
+    - List of dictionaries representing the obtained results.
+    """
 
     filter = DataService.FilterBuilder(factory=factory,area=area,year=year,month=month).build()
 
@@ -69,7 +96,20 @@ def get_products_month(factory : str = '', area : str = '',
 def get_products_year(factory : str = '', area : str = '', product_code : int=0, 
                       year : int = 0,
                       skip: int = 0, limit: int = 10):
-    
+    """
+    Endpoint to get yearly average product counts with filtering, pagination, and limits.
+
+    Parameters:
+    - factory (str): Filter for the factory.
+    - area (str): Filter for the area.
+    - product_code (int): Filter for the product code.
+    - year (int): Filter for the year.
+    - skip (int): Number of items to skip for pagination.
+    - limit (int): Maximum number of items to return.
+
+    Returns:
+    - List of dictionaries representing the obtained results.
+    """
     
     filter = DataService.FilterBuilder(factory = factory, area=area, year=year).build()
 
@@ -84,6 +124,7 @@ def get_products_year(factory : str = '', area : str = '', product_code : int=0,
 
 
 if __name__ == '__main__':
+    # Start the FastAPI application using Uvicorn on http://127.0.0.1:8000
     uvicorn.run(app, host = '127.0.0.1', port = 8000)
 
  
