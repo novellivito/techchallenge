@@ -8,7 +8,7 @@ BACKEND
 - Make sure you have Python 3.12 installed on your computer.
 - Open a terminal and navigate to the backend folder.
 - Create a virtual environment (venv) with the command: `python -m venv techchallenge-venv`
-- Activate the virtual environment with the command: `techchallenge-venv\Scripts\activate` for Windows, `techchallenge-venv\bin\activate` for macOS.
+- Activate the virtual environment with the command: `techchallenge-venv\Scripts\activate` for Windows, `soruce techchallenge-venv\bin\activate` for macOS.
 - Install all dependencies with this command: `pip install -r requirements.txt`
 - Start the execution of the file with the command: `python main.py`
 - The backend will respond on port 8000 (e.g., http://127.0.0.1:8000); available endpoints:
