@@ -101,6 +101,7 @@ class DataService():
             if self.product_month.size == 0:
                 self.product_month = product_day.groupby(['factory','area','year','month' ]) ['products_day'].mean().reset_index(name='avg_month')
                 print("function calc_products_month executed")
+            self.product_month['avg_month'] = self.product_month['avg_month'].round(2)
             return self.product_month
 
     def calc_products_year(self):
@@ -122,6 +123,7 @@ class DataService():
             if self.product_year.size == 0:
                 product_year = product_month.groupby(['factory','area', 'year' ]) ['avg_month'].mean().reset_index(name='avg_year')
                 print("function calc_products_year executed")
+            product_year['avg_year'] = product_year['avg_year'].round(2)
             return product_year
 
     class FilterBuilder():

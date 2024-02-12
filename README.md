@@ -34,7 +34,7 @@ BACKEND
 - Assicurati di avere installato Python 3.12 sul tuo computer.
 - Apri un terminale e posizionati nella cartella backend.
 - Crea un ambiente virtuale (venv) con il comando: `python -m venv techchallenge-venv`
-- Attiva l'ambiente virtuale con il comando: `techchallenge-venv\Scripts\activate` per Windows, `techchallenge-venv\bin\activate` per macOS.
+- Attiva l'ambiente virtuale con il comando: `techchallenge-venv\Scripts\activate` per Windows, `source techchallenge-venv\bin\activate` per macOS.
 - Installa tutte le dipendenze con questo comando: `pip install -r requirements.txt`
 - Avvia l'esecuzione del file con il comando: `python main.py`
 - Il backend risponderà sulla porta 8000 (es. http://127.0.0.1:8000); endpoint disponibili:
